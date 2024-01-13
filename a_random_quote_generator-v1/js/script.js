@@ -61,7 +61,7 @@ const length = quotes.length;
  * `getRandomQuote` function
 ***/
 function getRandomQuote () {
-  let randomNumber = Math.floor( Math.random() * length +1);
+  let randomNumber = Math.floor( Math.random() * length);
   return quotes[randomNumber];
 }
 
@@ -72,7 +72,7 @@ function getRandomQuote () {
  * `printQuote` function
 ***/
 function printQuote() {
-  const randomQuote = getRandomQuote();
+  let randomQuote = getRandomQuote();
   let quoteString = `<p class="quote">${randomQuote.quote}</p>
                       <p class="source">${randomQuote.source}`;
 if (randomQuote.citation) {
@@ -85,6 +85,8 @@ quoteString+=`</p>`;
 document.getElementById('quote-box').innerHTML = quoteString;                        
 
 }
+
+printQuote();
 
 
 /***
