@@ -14,31 +14,37 @@ const quotes = [
   {
     quote: "Keep smiling, because life is a beautiful thing and there is so much to smile about.",
     source: "Marilyn Monroe",
+    tags: "wisdom"
   },
   {
     quote: "The beautiful thing about learning is nobody can take it away from you.",
     source: "B.B. King",
     year: "September 1996"
+    
   },
   {
     quote: "May the Force be with you",
     source: "Obi-Wan Kenobi",
-    citation: "Star Wars, 1977"
+    citation: "Star Wars, 1977",
+    tags: "movie"
   },
   {
     quote: "The future belongs to those who believe in the beauty of their dreams.",
-    source: "Eleanor Roosevelt"
+    source: "Eleanor Roosevelt",
+
   },
   {
     quote: "After all, tomorrow is another day!",
     source: "Scarlett",
     citation: "Gone with the Wind",
-    year: "1939"
+    year: "1939",
+    tags: "movie"
   },
   {
     quote: "Always forgive your enemies; nothing annoys them so much.",
     source: "Oscar Wilde",
-    year: "June 1954"
+    year: "June 1954",
+    tags: "wisdom"
   },
   {
     quote: "If you look at what you have in life, you'll always have more. If you look at what you don't have in life, you'll never have enough.",
@@ -66,8 +72,6 @@ function getRandomQuote () {
 }
 
 
-
-
 /***
  * `printQuote` function
 ***/
@@ -81,12 +85,41 @@ if (randomQuote.citation) {
 if (randomQuote.year) {
   quoteString+=`<span class="year">${randomQuote.year}</span>`;                   
 } 
+if (randomQuote.tags) {
+  quoteString+=`<span class="citation">${randomQuote.tags}</span>`;                   
+} 
 quoteString+=`</p>`;
-document.getElementById('quote-box').innerHTML = quoteString;                        
-
+document.getElementById('quote-box').innerHTML = quoteString; 
+document.body.style.backgroundColor = changeBackgroundColor();          
 }
 
-printQuote();
+
+
+// function autoRefreshQuotes() {
+//   return setInterval(printQuote, 2000);
+// }
+
+// autoRefreshQuotes();
+
+setInterval(printQuote, 2000);
+
+function randomColor() {
+  color = Math.floor(Math.random() * 256);
+  return color;
+}
+
+
+function changeBackgroundColor() {
+let randomRGB = `rgb( ${randomColor()}, ${randomColor()}, ${randomColor()} )`;
+  return randomRGB;
+}
+
+
+// function autoRefreshQuotes() {
+//   let interval = setInterval(printQuote(), 2000);
+//   return interval;
+// }
+
 
 
 /***
