@@ -23,8 +23,7 @@ const quotes = [
   {
     quote: "The beautiful thing about learning is nobody can take it away from you.",
     source: "B.B. King",
-    year: "September 1996"
-    
+    year: "September 1996"    
   },
   {
     quote: "May the Force be with you",
@@ -35,7 +34,6 @@ const quotes = [
   {
     quote: "The future belongs to those who believe in the beauty of their dreams.",
     source: "Eleanor Roosevelt",
-
   },
   {
     quote: "After all, tomorrow is another day!",
@@ -91,7 +89,7 @@ function printQuote() {
   let randomQuote = getRandomQuote();
   //starting building a string with main <p> tags containing main properties "quote" and "source"
   let quoteString = `<p class="quote">${randomQuote.quote}</p>
-                      <p class="source">${randomQuote.source}`;
+                     <p class="source">${randomQuote.source}`;
   //checking if a random quote has "citation" property. If yes - adding it to the orinted quote 
   //using <span> tags              
 if (randomQuote.citation) {
@@ -116,11 +114,11 @@ document.body.style.backgroundColor = changeBackgroundColor();
 
 
 /***Created a timing function with the setInterval() method to print a new quote to the page with 10 sec intervals
- * just using one string of code - setInterval(printQuote, 10000); - had the same effect, but the project instructions
+ * just using one string of code - setInterval(printQuote, 3000); - had the same effect, but the project instructions
  * stated "Create a timing function", so I left it as it is.
  ***/
 function autoRefreshQuotes() {
-  return setInterval(printQuote, 10000);
+  return setInterval(printQuote, 3000);
 }
 //Calling a timing function 
 autoRefreshQuotes();
