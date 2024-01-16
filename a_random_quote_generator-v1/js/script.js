@@ -70,7 +70,7 @@ const quotes = [
 const length = quotes.length;
 
 /***
- * Created a getRandomQuote function which purpose is to return a ransom quote from the array "quotes" 
+ * Created a getRandomQuote function which purpose is to return a random quote from the array "quotes" 
  * by generating a random number (the index of the random element of the array) in the range from 0 
  * (1st item of the array) to "length" (last item of the array)m and returning a quote itself.
 ***/
