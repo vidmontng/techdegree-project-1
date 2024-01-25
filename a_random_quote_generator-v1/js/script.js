@@ -79,61 +79,71 @@ function getRandomQuote () {
   return quotes[randomNumber];
 }
 
-
 /***
- * Created a printQuote function. 
+ * I refactored the code for printQuote function by splitting "responsibilities" between three functions: 
+ * - buildNewQuote is used to "build" a new quote that will be inserted into the HTML element
+ * - displayNewQoute is used to reflect new information on the page - the content of the new quote and the changed random background
+ * - printQuote - our main function is now only responsible for responding to a user click - resetting the timer, and immediately displaying new quote, with new delay
 ***/
-function printQuote() {
 
-  //calling getRandomQuote function to get a random quote.
-  let randomQuote = getRandomQuote();
-  //starting building a string with main <p> tags containing main properties "quote" and "source"
-  let quoteString = `<p class="quote">${randomQuote.quote}</p>
-                     <p class="source">${randomQuote.source}`;
-  //checking if a random quote has "citation" property. If yes - adding it to the orinted quote 
-  //using <span> tags              
-if (randomQuote.citation) {
-  quoteString+=`<span class="citation">${randomQuote.citation}</span>`;                   
-}
-//same way checking if a random quote has "year" property and adding it to the printed quote
-if (randomQuote.year) {
-  quoteString+=`<span class="year">${randomQuote.year}</span>`;                   
-} 
-//checking if a random quote has "tags" property and adding it to the printed quote.
-//I used "citation" styling class for printing"tags" saince we're not allowed to change initial CSS file
-if (randomQuote.tags) {
-  quoteString+=`<span class="citation">${randomQuote.tags}</span>`;                   
-} 
-//closing the printed quote with a closing </p> tag 
-quoteString+=`</p>`;
-//chosing div with "quote-box" ID and changing it's content to reflect newly built random quote
-document.getElementById('quote-box').innerHTML = quoteString; 
-//assinging new random background color for every newly printed quote
-document.body.style.backgroundColor = changeBackgroundColor();          
+
+  function buildNewQuote() {
+        let randomQuote = getRandomQuote();
+        //starting building a string with main <p> tags containing main properties "quote" and "source"
+        let quoteString = `<p class="quote">${randomQuote.quote}</p>
+                          <p class="source">${randomQuote.source}`;
+        //checking if a random quote has "citation" property. If yes - adding it to the orinted quote 
+        //using <span> tags              
+        if (randomQuote.citation) {
+        quoteString+=`<span class="citation">${randomQuote.citation}</span>`;                   
+        }
+        //same way checking if a random quote has "year" property and adding it to the printed quote
+        if (randomQuote.year) {
+        quoteString+=`<span class="year">${randomQuote.year}</span>`;                   
+       } 
+        //checking if a random quote has "tags" property and adding it to the printed quote.
+        //I used "citation" styling class for printing"tags" saince we're not allowed to change initial CSS file
+        if (randomQuote.tags) {
+        quoteString+=`<span class="citation">${randomQuote.tags}</span>`;                   
+        } 
+        //closing the printed quote with a closing </p> tag 
+        quoteString+=`</p>`;
+        return quoteString;
 }
 
+/***Timing function with the setInterval() method to print a new quote to the page with 4 sec intervals***/
+  var interval =  setInterval(displayNewQoute, 4000);
+ 
+  //function, that reflects new information on the page - the content of the new quote and the changed random background
+ function displayNewQoute () {
+        //chosing div with "quote-box" ID and changing it's content to reflect newly built random quote
+        document.getElementById('quote-box').innerHTML = buildNewQuote(); 
+        //assinging new random background color for every newly printed quote
+        document.body.style.backgroundColor = changeBackgroundColor();
+ }
 
-/***Created a timing function with the setInterval() method to print a new quote to the page with 10 sec intervals
- * just using one string of code - setInterval(printQuote, 3000); - had the same effect, but the project instructions
- * stated "Create a timing function", so I left it as it is.
- ***/
-function autoRefreshQuotes() {
-  return setInterval(printQuote, 3000);
+
+//  main function is now only responsible for responding to a user click - resetting the timer, and immediately displaying new quote, with new delay
+ function printQuote() { 
+       clearInterval(interval);
+       displayNewQoute();       
+       interval =  setInterval(displayNewQoute, 4000);
 }
-//Calling a timing function 
-autoRefreshQuotes();
 
-//created randomColor function which purpose was to generate a random number from 0 to 255
+
+//created randomColor function which purpose was to generate a random number from 0 to 255 for the changeBackgroundColor function
 function randomColor() {
   color = Math.floor(Math.random() * 256);
   return color;
 }
 
-//created changeBackgroundColor function that will generate a new rgb color with 3 different values for r, g and b
+//function that will generate a new rgb color with 3 different values for r, g and b components of a random rgb color
 function changeBackgroundColor() {
 let randomRGB = `rgb( ${randomColor()}, ${randomColor()}, ${randomColor()} )`;
   return randomRGB;
 }
+
+
 
 
 /***
